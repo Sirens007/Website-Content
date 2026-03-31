@@ -1,5 +1,5 @@
 ---
-title:栈与队列：概念、实现与典型应用
+title: 栈与队列：概念、实现与典型应用
 published: 2026-03-27
 pinned: false
 description: "梳理 Java 中栈（Stack）与队列（Queue）的基础概念，包含物理结构对比、用数组模拟实现循环队列，以及有效的括号等经典 LeetCode 题解思路."
