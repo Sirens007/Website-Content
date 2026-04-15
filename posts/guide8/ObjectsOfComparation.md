@@ -1,8 +1,8 @@
 ---
-title: 
+title: Java对象比较方式：equals、Comparable与Comparator
 published: 2026-04-14
 pinned: false
-description: "."
+description: "通过示例分析 Java 对象比较的三种实现方式，包括 equals 重写、自然排序与自定义比较器."
 image: ./d8.png
 tags: ["数据结构", "Java"]
 category: 开发

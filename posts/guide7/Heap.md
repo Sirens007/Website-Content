@@ -1,8 +1,8 @@
 ---
-title: 
+title: 大根堆、小根堆及TopK问题
 published: 2026-04-08
 pinned: false
-description: "."
+description: "从堆的结构与操作出发，讲解建堆、调整及优先队列实现，并给出 TopK 问题的常见解法."
 image: ./d7.png
 tags: ["数据结构", "Java"]
 category: 开发
