@@ -1,4 +1,14 @@
-# 
+---
+title: MySQL数据库：事务
+published: 2026-08-07
+pinned: false
+description: "系统学习MySQL事务、ACID、隔离级别、MVCC、锁与日志机制."
+image: ./mysql.png
+tags: ["MySQL"]
+category: MySQL
+draft: false
+---
+
 
 > 适用环境：MySQL 8.0，主要讨论 InnoDB
 >
