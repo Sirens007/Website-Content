@@ -2,7 +2,7 @@
 title: MySQL数据库：事务
 published: 2026-08-07
 pinned: false
-description: "系统学习MySQL事务、ACID、隔离级别、MVCC、锁与日志机制."
+description: "系统学习MySQL事务、ACID、隔离级别、MVCC机制."
 image: ./mysql.png
 tags: ["MySQL"]
 category: MySQL
@@ -82,6 +82,8 @@ MySQL 不支持普通事务嵌套。在未结束的事务中再次执行 `START 
 
 ### 4.1 开启事务，执行修改后回滚
 
+开启事务
+
 ```sql
 # 开启事务
 mysql> START TRANSACTION;
@@ -96,7 +98,11 @@ mysql> SELECT * FROM bank_account;
 |  2 | 李四 | 1000.00 |
 +----+------+---------+
 2 rows in set (0.00 sec)
+```
 
+执行修改
+
+```sql
 # 张三余额减少 100
 mysql> UPDATE bank_account
        SET balance = balance - 100
@@ -120,7 +126,11 @@ mysql> SELECT * FROM bank_account;
 |  2 | 李四 | 1100.00 |
 +----+------+---------+
 2 rows in set (0.00 sec)
+```
 
+回滚事务
+
+```sql
 # 回滚事务
 mysql> ROLLBACK;
 Query OK, 0 rows affected (0.00 sec)
@@ -138,6 +148,8 @@ mysql> SELECT * FROM bank_account;
 
 ### 4.2 开启事务，执行修改后提交
 
+开启事务
+
 ```sql
 # 开启事务
 mysql> BEGIN;
@@ -153,6 +165,11 @@ mysql> SELECT * FROM bank_account;
 +----+------+---------+
 2 rows in set (0.00 sec)
 
+```
+
+执行修改
+
+```sql
 # 张三余额减少 100
 mysql> UPDATE bank_account
        SET balance = balance - 100
@@ -176,7 +193,11 @@ mysql> SELECT * FROM bank_account;
 |  2 | 李四 | 1100.00 |
 +----+------+---------+
 2 rows in set (0.00 sec)
+```
 
+提交事务
+
+```sql
 # 提交事务
 mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
@@ -231,12 +252,26 @@ commit;              -- 之后仍需继续显式提交或回滚
 > [!CAUTION]
 >
 > - 只要使用 `start transaction` 或 `begin` 开启事务，必须要通过 `commit` 提交才会持久化，与是否设置 `set autocommit` 无关；
-> - 手动提交模式下，不用显示开启事务，执行修改操作后，提交或回滚事务时直接使用`commit` 或 `rollback`；
+> - 手动提交模式下，不用显式开启事务，执行修改操作后，提交或回滚事务时直接使用`commit` 或 `rollback`；
 > - 已提交的事务不能回滚；
 
 ---
 
 ## 6. 保存点
+
+涉及语法：
+
+```sql
+savepoint 保存点名称;
+```
+
+回滚到指定保存点：
+
+```sql
+rollback to 保存点名称;
+```
+
+例如：
 
 保存点用于只撤销事务后半段，不等于提交前半段：
 
@@ -256,7 +291,7 @@ release savepoint before_transfer;      -- 删除保存点，不提交事务
 commit;
 ```
 
-`ROLLBACK TO SAVEPOINT` 不结束事务；目标保存点之后创建的保存点会被删除。`COMMIT` 或不带保存点的 `ROLLBACK` 才会结束事务并清除全部保存点。InnoDB 回滚到保存点时不保证释放之后取得的全部内存行锁，因此保存点不能代替“缩短事务”。
+`ROLLBACK TO SAVEPOINT` 不结束事务；目标保存点之后创建的保存点会被删除。`COMMIT` 或不带保存点的 `ROLLBACK` **才会结束事务并清除全部保存点**。InnoDB 回滚到保存点时不保证释放之后取得的全部内存行锁，因此保存点不能代替“缩短事务”。
 
 ---
 
@@ -266,7 +301,7 @@ commit;
 
 MySQL服务被多个客户端同时访问，每个客户端执行的DML语句以事务为基本单位，那么不同的客户端在对同一张表中的**同一条数据进行修改时就可能出现相互影响**的情况，为保证不同事务直接执行时不受影响，因此事务之间就需要相互隔离
 
-### 7.2 隔离级别
+### 7.2 隔离级别及设置语法
 
 | 隔离级别 | 脏读 | 不可重复读 | 幻读（SQL 标准） | InnoDB 主要行为 |
 | --- | --- | --- | --- | --- |
@@ -276,6 +311,22 @@ MySQL服务被多个客户端同时访问，每个客户端执行的DML语句以
 | `SERIALIZABLE` 串行化 | 避免 | 避免 | 避免 | 显式事务中的普通读会按共享锁读处理，冲突等待更多 |
 
 隔离越强不代表所有事务真的在全库中逐个执行。即使是 `SERIALIZABLE`，互不冲突的事务仍可并发；它主要通过更严格的锁让冲突操作等待，因此吞吐量通常更低。
+
+涉及语法：
+
+1. 查看全局隔离级别
+
+   ```sql
+   select @@global.transaction_isolation;
+   ```
+
+2. 查看当前会话隔离级别
+
+   ```sql
+   select @@session.transaction_isolation;
+   ```
+
+**以下是设置SESSION隔离级别**
 
 设置事务的隔离级别和访问模式，可以使用以下语法：
 
@@ -334,6 +385,138 @@ SET @@SESSION.transaction_isolation = 'REPEATABLE-READ';
 
 使用系统变量赋值时值中写连字符，如 `SET SESSION transaction_isolation='READ-COMMITTED'`；使用 `SET TRANSACTION ... LEVEL` 语法时写空格。改变隔离级别前应确认作用域，做双会话实验时直接设置 `SESSION` 最清楚。
 
+### 7.3 脏读 READ UNCOMMITTED 示例
+
+客户端 A 设置 READ UNCOMMITTED
+
+客户端 B 设置 READ UNCOMMITTED
+
+**客户端 A 开启事务并修改，但不提交**
+
+```sql
+start transaction;
+
+update bank_account
+set balance = 100000
+where name = '王五';
+
+select *
+from bank_account
+where name = '王五';
+```
+
+客户端 A 自己看到：王五 100000.00
+
+**客户端 B 读取数据**
+
+```sql
+start transaction;
+
+select *
+from bank_account
+where name = '王五';
+```
+
+在 `READ UNCOMMITTED` 下，按照资料的实验逻辑，客户端 B 可以看到事务A尚未提交的修改：王五 100000.00
+
+此时发生了**脏读**
+
+```txt
+客户端A                         客户端B
+事务A                           事务B
+
+START TRANSACTION
+     │
+UPDATE 王五=100000
+     │
+没有COMMIT
+     │
+     ├──────────────────────→ SELECT
+     │                         读到100000
+     │
+ROLLBACK
+     │
+王五恢复2000
+                               SELECT
+                               读到2000
+```
+
+### 7.4 不可重复读 READ COMMITTED 示例
+
+```txt
+客户端A                             客户端B
+事务A                               事务B
+
+START TRANSACTION
+    │
+SELECT 王五
+    │
+    └── 2000
+
+                                START TRANSACTION
+                                       │
+                                UPDATE 王五=1000
+                                       │
+                                   尚未COMMIT
+
+SELECT 王五
+    │
+    └── 2000
+        ↑
+        看不到B未提交的数据
+
+                                   COMMIT
+                                     │
+                                     ↓
+                                1000正式提交
+
+SELECT 王五
+    │
+    └── 1000
+
+事务A中：
+第一次 = 2000
+第二次 = 1000
+
+→ 不可重复读
+```
+
+### 7.5 REPEATABLE READ 示例
+
+```txt
+事务A第一次SELECT
+        ↓
+	看到2000
+
+事务B UPDATE
+金额改为1000 + COMMIT
+        ↓
+
+事务A第二次SELECT
+        ↓
+	仍然看到2000
+
+→解决不可重复读
+```
+
+### 7.6 串行化 SERIALIZABLE 示例
+
+尽量让事务表现得像**一个一个顺序执行**。
+
+```txt
+事务A
+  ↓
+执行完成
+
+事务B
+  ↓
+执行完成
+
+事务C
+  ↓
+执行完成
+```
+
 ---
 
 ## 8. MVCC 与一致性读原理
@@ -362,86 +545,7 @@ flowchart LR
 
 ---
 
-## 9. 快照读、当前读与锁
-
-在 `READ COMMITTED`、`REPEATABLE READ` 下，普通 `SELECT` 通常是快照读（一致性非锁定读），读取符合 Read View 的版本，不给所读记录加行锁。
-
-以下属于当前读：`UPDATE`、`DELETE`、`INSERT`，以及：
-
-```sql
-select * from bank_account where id = 1 for share;
-select * from bank_account where id = 1 for update;
-```
-
-`FOR SHARE` 取得共享锁，允许其他事务共享读但阻止冲突修改；`FOR UPDATE` 读取最新可用数据并取得排他锁。锁会保持到事务提交或完整回滚。
-
-InnoDB 所谓“行锁”实际锁在索引记录上：
-
-- Record Lock：锁定某个索引记录；
-- Gap Lock：锁定索引记录之间的间隙，主要阻止插入；
-- Next-Key Lock：Record Lock 与前方 Gap Lock 的组合。
-
-在 `REPEATABLE READ` 下，按唯一索引等值查到唯一记录时通常只锁记录；范围条件会锁扫描到的索引范围和相关间隙，以阻止出现符合范围的新行。若缺少合适索引，扫描记录更多，锁范围也可能扩大，所以索引不仅影响查询速度，也影响并发。
-
-InnoDB 的普通 RR 快照读不会在第二次查询看到其他事务刚插入的行；锁定范围读又通过 Next-Key Lock 阻止相关插入。因此不能简单记成“RR 必然仍会幻读”。同时混用快照读和当前读时，两者观察的数据时点不同，必须按业务语义谨慎设计。
-
----
-
-## 10. undo、redo 与提交
-
-修改数据时，InnoDB 不是每次都先把完整数据页立即刷盘：
-
-1. undo log 记录如何恢复旧值，服务于回滚和 MVCC；
-2. 内存中的数据页被修改并成为脏页；
-3. redo log 记录恢复这些页修改所需的信息，遵循先写日志再写数据页的思想；
-4. 提交时按配置把日志写入并刷到稳定存储，脏页可稍后落盘；
-5. 崩溃恢复时利用 redo 重放必要修改，并处理未提交事务，使数据恢复到一致状态。
-
-redo log 是 InnoDB 的崩溃恢复日志；binlog 属于 MySQL Server 层，主要用于复制和按时间点恢复，二者用途不同。
-
-`innodb_flush_log_at_trx_commit=1` 是 MySQL 8.0 默认值，提交时写并刷 redo，提供完整 ACID 所需的持久性。设为 `0` 或 `2` 可减少刷盘，但服务器或操作系统崩溃时可能丢失约一秒内的已提交事务，不能只为“更快”随意修改。
-
----
-
-## 11. 死锁与事务监控
-
-若事务 A 已锁定记录 1、等待记录 2，事务 B 已锁定记录 2、又等待记录 1，就形成死锁。InnoDB 默认会检测循环等待，选择一个事务作为牺牲者并回滚，常见错误为 1213；应用必须把整个事务作为一个单元重新执行，而不是只重试最后一条 SQL。
-
-减少死锁的方法：
-
-1. 多表、多行更新始终采用一致顺序；
-2. 事务保持短小，提交前不等待用户输入、网络请求或耗时计算；
-3. 建立合适索引，减少扫描记录与加锁范围；
-4. 大批量修改拆成可控批次；
-5. 重试设置次数上限和退避时间，避免无限循环。
-
-```sql
-show engine innodb status\G  -- 查看最近一次死锁（mysql 客户端写法）
-
-select trx_id, trx_state, trx_started, trx_query
-from information_schema.innodb_trx;
-
-select * from performance_schema.data_lock_waits;
-```
-
-死锁与锁等待超时不同：死锁是循环依赖，通常会很快检测；超时是某事务等待锁超过限制。两者都应记录日志、回滚当前事务并按业务决定是否重试。
-
----
-
-## 12. 自测
-
-1. 为什么转账不能只依赖两条自动提交的 `UPDATE`？
-2. `ROLLBACK TO SAVEPOINT` 会结束事务吗？
-3. RC 与 RR 的 Read View 建立时机有什么区别？
-4. 为什么 `SELECT ... FOR UPDATE` 与普通 `SELECT` 看到的时点可能不同？
-5. 为什么缺少索引会使并发性能也变差？
-6. 发生死锁后，为什么应重试整个事务？
-
-答案：1）第一条提交后第二条可能失败，无法整体撤销；2）不会，只撤销目标保存点后的修改；3）RC 每条一致性读建立新视图，RR 通常复用第一次一致性读的视图；4）前者是读取最新可用版本并加锁的当前读，后者通常读取快照；5）扫描和锁定的索引记录更多；6）InnoDB 可能已回滚牺牲者的整个事务，只重试末条语句会遗漏前面的业务操作。
-
----
-
-## 参考资料
+## 参考
 
 - [MySQL 8.0：事务的开始、提交与回滚](https://dev.mysql.com/doc/refman/8.0/en/commit.html)
 - [MySQL 8.0：事务隔离级别](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html)
@@ -449,4 +553,3 @@ select * from performance_schema.data_lock_waits;
 - [MySQL 8.0：InnoDB 锁](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html)
 - [MySQL 8.0：MVCC](https://dev.mysql.com/doc/refman/8.0/en/innodb-multi-versioning.html)
 - [MySQL 8.0：隐式提交](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html)
-- [MySQL 8.0：死锁处理](https://dev.mysql.com/doc/refman/8.0/en/innodb-deadlocks-handling.html)
