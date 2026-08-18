@@ -38,7 +38,7 @@ export const devicesData: DeviceCategory = {
 			image: "/images/device/Lenovo-Y7000p-2024.png",
 			specs: "i7-14700HX / 16G + 1TB",
 			description:
-				"英特尔14代酷睿， 4060显卡，144Hz电竞屏",
+				"英特尔14代酷睿， 4060显卡，165Hz电竞屏",
 			link: "https://item.lenovo.com.cn/product/1035316.html",
 		},
 				{
