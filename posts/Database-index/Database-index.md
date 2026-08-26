@@ -422,6 +422,54 @@ show create table t_user_multi1;
 
 修改或删除索引前先查看建表语句，可以确认字段完整属性、约束名和索引名，避免删除错对象。
 
+#### 6.2.4 查看是否使用索引
+
+使用 `explain + select ` 查询可以知道该查询**是否使用了索引**以及**使用了哪个索引**
+
+例如：
+
+![](../assets/Index8.png)
+
+1. `select_type`：查询类型，常见有`simple`、`primary`、`subquery`、`derived`、`union`；
+
+2. `type`：MySQL 访问这张表时采用什么方式。排序有以下 
+
+   【**好** <- system、const、eq_ref、ref、fulltext、ref_or_null、index_merge、unique_subquery、index_subquery、range、index、ALL -> **差**】；
+
+   All：全表扫描
+
+   **index**：扫描全部索引树
+
+   range：扫描部分索引，索引范围扫描，对索引的扫描开始于某一点，返回匹配值域的行，常见于between、<、>等的查询
+
+   **ref**：使用非唯一索引或非唯一索引前缀进行的查找，不是主键或不是唯一索引
+
+   （eq_ref和const的区别）
+
+   **eq_ref**：唯一索引性扫描，对于每个索引键，表中只有一条记录与之匹配。常见于主键或唯一索引扫描
+
+   **const**、**system**：单表中最多有一个匹配行，查询起来非常迅速，例如根据主键或唯一索引查询。system是const类型的特例，当查询的表只有一行的情况下，使用system。
+
+   **NULL**：不用访问表或者索引，直接就能得到结果
+
+3. possible_keys：MySQL 判断这条 SQL **可能使用的索引**，但不代表最终真的用了；
+
+4. key：这个才表示 MySQL 最终实际选择使用的索引；
+
+5. Extra：执行情况的说明和描述，常见有以下
+
+| Extra                          | 含义                                           |
+| ------------------------------ | ---------------------------------------------- |
+| `Using index`                  | 使用覆盖索引，不需要回表读取完整行             |
+| `Using where`                  | 还需要通过 WHERE 条件进行过滤                  |
+| `Using index condition`        | 使用索引条件下推（ICP）                        |
+| `Using temporary`              | 使用临时表                                     |
+| `Using filesort`               | 需要额外排序                                   |
+| `Using index for group-by`     | GROUP BY / DISTINCT 等利用索引优化             |
+| `Impossible WHERE`             | WHERE 条件不可能成立                           |
+| `Select tables optimized away` | 优化器可以直接得到结果，不需要按常规方式访问表 |
+| `NULL`                         | 没有额外信息                                   |
+
 ### 6.3 修改索引
 
 MySQL 可以重命名索引：
