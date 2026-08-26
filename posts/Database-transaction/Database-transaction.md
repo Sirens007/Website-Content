@@ -310,6 +310,10 @@ MySQL服务被多个客户端同时访问，每个客户端执行的DML语句以
 | `REPEATABLE READ` 可重复读 | 避免 | 避免 | 标准允许 | InnoDB 默认；普通读复用快照，范围锁定读用 Next-Key Lock 防典型幻读 |
 | `SERIALIZABLE` 串行化 | 避免 | 避免 | 避免 | 显式事务中的普通读会按共享锁读处理，冲突等待更多 |
 
+从上往下：并发性能越低，隔离度（安全性）越高
+
+
+
 隔离越强不代表所有事务真的在全库中逐个执行。即使是 `SERIALIZABLE`，互不冲突的事务仍可并发；它主要通过更严格的锁让冲突操作等待，因此吞吐量通常更低。
 
 涉及语法：
@@ -385,7 +389,9 @@ SET @@SESSION.transaction_isolation = 'REPEATABLE-READ';
 
 使用系统变量赋值时值中写连字符，如 `SET SESSION transaction_isolation='READ-COMMITTED'`；使用 `SET TRANSACTION ... LEVEL` 语法时写空格。改变隔离级别前应确认作用域，做双会话实验时直接设置 `SESSION` 最清楚。
 
-### 7.3 脏读 READ UNCOMMITTED 示例
+### 7.3 脏读示例
+
+> **脏读**：一个事务读取到了另一个事务尚未提交的数据。
 
 客户端 A 设置 READ UNCOMMITTED
 
@@ -441,7 +447,9 @@ ROLLBACK
                                读到2000
 ```
 
-### 7.4 不可重复读 READ COMMITTED 示例
+### 7.4 不可重复读示例
+
+> **不可重复读**：同一个事务中，使用相同条件读取同一行数据，两次得到的字段值不同。
 
 ```txt
 客户端A                             客户端B
@@ -479,27 +487,80 @@ SELECT 王五
 第二次 = 1000
 
 → 不可重复读
+事务 A 中的两条查询完全相同，但第一次得到 2000，第二次得到 1000，因此称为“不可重复读”。
 ```
 
-### 7.5 REPEATABLE READ 示例
+因为 InnoDB 在 `READ COMMITTED` 下，每次普通一致性查询都会建立一个新的数据快照，所以第二次查询可以看到其他事务新提交的修改。
 
-```txt
-事务A第一次SELECT
-        ↓
-	看到2000
+在 `REPEATABLE READ` 下，同一个事务中的普通 `SELECT` 通常使用第一次查询建立的快照，所以能够保持重复读取结果一致。
 
-事务B UPDATE
-金额改为1000 + COMMIT
-        ↓
+### 7.5 幻读示例
 
-事务A第二次SELECT
-        ↓
-	仍然看到2000
+> **幻读**：同一个事务中，使用相同范围条件查询两次，第二次查询出现或消失了一些**符合条件的记录**
 
-→解决不可重复读
+假设第一次查询余额不低于 1000 元的账户：
+
+```
+-- 事务 A
+start transaction;
+
+select *
+from bank_account
+where balance >= 1000;
 ```
 
-### 7.6 串行化 SERIALIZABLE 示例
+第一次结果有两行：
+
+| id   | name | balance |
+| ---- | ---- | ------- |
+| 1    | 张三 | 1000    |
+| 2    | 李四 | 1000    |
+
+然后事务 B 插入一条符合条件的数据并提交：
+
+```
+-- 事务 B
+start transaction;
+
+insert into bank_account (name, balance)
+values ('王五', 2000);
+
+commit;
+```
+
+事务 A 再次执行相同查询：
+
+```
+select *
+from bank_account
+where balance >= 1000;
+```
+
+如果第二次结果变成三行：
+
+| id   | name | balance |
+| ---- | ---- | ------- |
+| 1    | 张三 | 1000    |
+| 2    | 李四 | 1000    |
+| 3    | 王五 | 2000    |
+
+事务 A 会感觉像凭空出现了一条记录，因此称为“幻读”。
+
+**注意：**
+
+不可重复读是**指同一行的值变**了，而幻读是**结果集中的行变**了。
+
+**不可重复读**通常是由另一个事务执行 `update` 并提交引起；
+
+**幻读**通常是由另一个事务执行 `insert` 或 `delete` 并提交引起。
+
+
+
+**但 MySQL InnoDB 比较特殊**
+
+在InnoDB的 REPEATABLE READ 下，典型的幻读通常已经被解决。涉及到MVCC，Next-Key Lock。
+
+### 7.6 串行化 SERIALIZABLE 解释
 
 尽量让事务表现得像**一个一个顺序执行**。
 
