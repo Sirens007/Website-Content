@@ -321,7 +321,7 @@ to 'sqllearn_read'@'localhost';
 
 在`select`权限下执行`insert`操作会有如下报错：
 
-![image-20260823223715081](./assets/userPermissions0.png)
+![](../assets/userPermissions0.png)
 
 限制到一张表：
 
