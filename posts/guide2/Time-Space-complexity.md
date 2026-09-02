@@ -86,7 +86,7 @@ int fibnacci(int N){
 ```
 
 
-![](../assets/Time-Space-complexity1.png)
+![](./Time-Space-complexity1.png)
 
 以上为粗略计算过程，因此其递归次数就为等比数列求和即可，最终为 **O(2^n)**
 
@@ -96,7 +96,7 @@ int fibnacci(int N){
 时间复杂度平均情况是：在所有可能输入中，按每种输入出现的概率加权后，算法执行时间的数学期望。
 
 其公式表达情况为：
-![](../assets/Time-Space-complexity2.svg)
+![](./Time-Space-complexity2.svg)
 
 > + T<sub>i</sub>(n)：第 i 种情况的执行步数
 > + P<sub>i</sub>：该情况发生的概率
@@ -131,11 +131,11 @@ return -1;
 >
 
 **计算数学期望：**
-![](../assets/Time-Space-complexity3.svg)
+![](./Time-Space-complexity3.svg)
 
 利用等差数列公式：
 
-![](../assets/Time-Space-complexity4.svg)
+![](./Time-Space-complexity4.svg)
 
 最终时间复杂度为 O(n)
 

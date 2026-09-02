@@ -43,7 +43,7 @@ Hash 根据哈希值定位桶，平均等值查找很快，但键值没有顺序
 
 ### 2.2 二叉树为什么不适合磁盘索引
 
-![image-20260802185245361](../assets/Index0.png)
+![image-20260802185245361](./Index0.png)
 
 普通二叉搜索树可能退化成链表；
 
@@ -59,7 +59,7 @@ AVL、红黑树虽能控制高度，但每个节点只有两个分支；
 
 B+ 树是多路平衡查找树，核心特点如下：
 
-![image-20260802183816771](../assets/Index1.png)
+![image-20260802183816771](./Index1.png)
 
 1. 非叶子节点主要保存分隔键和子页面指针，同一页可容纳较多分支，树通常很矮；
 2. 真正的索引记录集中在叶子层，从根到任意叶子的路径长度相同；
@@ -118,7 +118,7 @@ show variables like 'innodb_page_size';
 
 数据页的基本结构如下图：
 
-![image-20260803214934039](../assets/Index2.png)
+![image-20260803214934039](./Index2.png)
 
 页内记录通过链表维持逻辑顺序；查询时先对 Page Directory 的槽做二分定位，再在很小的分组内查找。B+ 树解决“定位哪一页”，页目录解决“在这一页的哪里”。叶子页之间的双向链表则服务于跨页范围扫描。
 
@@ -128,7 +128,7 @@ show variables like 'innodb_page_size';
 
 页文件头与页文件尾中包含的信息如下图：
 
-![image-20260803215355955](../assets/Index3.png)
+![image-20260803215355955](./Index3.png)
 
 上图中我们只关注：上一页页号和下一页页号，就类似链表中的头节点、尾节点链接形成一个**双向链表**
 
@@ -138,11 +138,11 @@ show variables like 'innodb_page_size';
 
 此外，每一个数据行都有一个记录下一行的地址偏移量的区域`next_record`将页内所有数据行组成了一个单向链表，其结构图如下：
 
-![image-20260804004331641](../assets/Index4.png)
+![image-20260804004331641](./Index4.png)
 
 当有一个新页插入数据时，将`Infimun`连接第一个数据行,最后一行真实数据行连接`Supremun`，该单向链表就如下图结构所示：
 
-![image-20260804004834696](../assets/Index5.png)
+![image-20260804004834696](./Index5.png)
 
 ### 3.4 页目录
 
@@ -154,13 +154,13 @@ show variables like 'innodb_page_size';
 
 所以后续在查询某行时，通过二分查找，先找到对应的槽，随后在槽内最多8个数据行中进行遍历即可；
 
-![image-20260804154049947](../assets/Index6.png)
+![image-20260804154049947](./Index6.png)
 
 ### 3.5 数据页头
 
 数据页头记录了当前页保存数据相关的信息，如下图：
 
-![image-20260804154333343](../assets/Index7.png)
+![image-20260804154333343](./Index7.png)
 
 ## 4. 聚集索引、二级索引与回表
 
@@ -428,7 +428,7 @@ show create table t_user_multi1;
 
 例如：
 
-![](../assets/Index8.png)
+![](./Index8.png)
 
 1. `select_type`：查询类型，常见有`simple`、`primary`、`subquery`、`derived`、`union`；
 

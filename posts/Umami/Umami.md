@@ -8,7 +8,7 @@ category: 钻研一下~
 draft: false
 ---
 
-![](assets/umami1.png)
+![](./umami1.png)
 
 相信我，dockeZ 会比直接裸装数据库要好，因为很大可能你的 Umami build 不动，除非本地构建再上传；就是那样的话本地还得装环境，况且 Umami 官方是支持 docker 部署的
 
@@ -158,7 +158,7 @@ sudo docker compose logs -f umami
 确认 Umami 和 PostgreSQL 是否正常运行，尤其是数据库，像图片中就是正常运行了
 
 
-![](assets/umami2.png)
+![](./umami2.png)
 
 **4.测试本地访问**
 
@@ -227,7 +227,7 @@ sudo systemctl reload nginx
 申请后可以在阿里云的工作台**一键上传证书和私钥，记得上传**
 
 
-![](assets/umami3.png)
+![](./umami3.png)
 
 随后便可以登录 Umami：
 
@@ -262,14 +262,14 @@ sudo systemctl reload nginx
 **2.访问** [<u><font style="color:rgb(30, 30, 30);">Umami Cloud Data | Settings</font></u>](https://cloud.umami.is/settings/data)<font style="color:rgb(31, 31, 31);"> ，</font>**<font style="color:rgb(31, 31, 31);">选择导出数据</font>**
 
 
-![](assets/umami4.png)
+![](./umami4.png)
 
 随后会在你注册的邮箱中收到一个 zip 压缩包，其中只有 website_event.csv 这个文件有数据，其他两个只有表头
 
 不知道你是一位喜欢 CLI 界面还是 GUI 界面的爱好者，如果是喜欢命令行的话在服务器用查询语句就可以查到 umami 这个仓库下的所有字段；如果喜欢图形化，那么 Navicat 可能是你需要的，或者<font style="color:rgb(31, 31, 31);"> </font>[<u><font style="color:rgb(30, 30, 30);">pgAdmin - PostgreSQL Tools</font></u>](https://www.pgadmin.org/)。类似下图中可以看到各个字段的顺序，同时也可以修改
 
 
-![](assets/umami5.png)
+![](./umami5.png)
 
 
 
@@ -279,7 +279,7 @@ sudo systemctl reload nginx
 
 <font style="color:rgb(30, 30, 30);">website_event.csv 该文件中的 event_id 需要</font>**<font style="color:rgb(30, 30, 30);">修改为服务器部署的 Umami 增设的 website 新获得的 websiteId</font>**<font style="color:rgb(30, 30, 30);">，只有此处有修改，剩下的只需要排序即可</font>
 
-![](assets/umami6.png)
+![](./umami6.png)
 
 **3. 随后使用 scp 命令上传至服务器即可**
 

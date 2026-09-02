@@ -15,7 +15,7 @@ draft: false
 
 ### 1.1 了解树
 
-![](../assets/BinaryTree1.png)
+![](./BinaryTree1.png)
 
 形如图中的结构，称之为树型结构。实际上，`数据结构的树 = 图论中的树 + 根节点 + 父子关系`
 
@@ -55,7 +55,7 @@ draft: false
 2. **完全二叉树**：除了最后一层外，其余各层都被完全填满，并且最后一层的节点从左至右连续排列，中间不能空缺
 
 图像概念如下：
-![](../assets/BinaryTree2.png)
+![](./BinaryTree2.png)
 
 ### 2.2 二叉树的性质
 1. 若规定**根结点的层数为1**，则一棵**非空二叉树的第i层上最多有** 2<sup>i-1</sup>**(i>0)个结点**
@@ -266,7 +266,7 @@ public static void inorderThread(ThreadNode node) {
 **左孩子：2 * i + 1**
 
 **右孩子：2 * i + 2**
-![](../assets/BinaryTree3.png)
+![](./BinaryTree3.png)
 
  顺序存储（数组下标） = 二叉树的层序遍历顺序  
 
@@ -274,7 +274,7 @@ public static void inorderThread(ThreadNode node) {
 >
 
 当不是完全二叉树时，其存储情况如此图
-![](../assets/BinaryTree4.png)
+![](./BinaryTree4.png)
 
 ### 2.4 二叉树的基本操作
 #### 2.4.1 二叉树的三种遍历
@@ -290,7 +290,7 @@ public static void inorderThread(ThreadNode node) {
 ```
 
 **非递归方法如下**：
-![](../assets/BinaryTree5.png)
+![](./BinaryTree5.png)
 
 **思路**
 
@@ -381,7 +381,7 @@ public void postorderTree(TreeNode root) {
 ```
 
 **下面为非递归方法：**
-![](../assets/BinaryTree6.png)
+![](./BinaryTree6.png)
 
 **注意：**
 

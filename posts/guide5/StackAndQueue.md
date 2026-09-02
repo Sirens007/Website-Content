@@ -21,11 +21,11 @@ draft: false
 出栈：栈的删除操作叫做出栈
 
 其概念图如下：
-![](../assets/StackAndQueue1.png)
+![](./StackAndQueue1.png)
 
 ### 1.2 队列的三种实现
 栈的方法不多，我们可以查看查看 Stack 源码中的方法
-![](../assets/StackAndQueue2.png)
+![](./StackAndQueue2.png)
 
 其方法说明如下
 
@@ -122,7 +122,7 @@ public class MyStack {
 对于此题，我们可以先创建几个例子，如`([])`、`([)]`、`(()`据此可以构建该模型。
 
 > 既然是要左括号匹配右括号，我们可以思考，假设先遇到左括号正常返回 true 的例子，并能够以**最近遇到的左括号**去匹配**右括号**，只能是通过**栈（Stack）**这个数据结构来完成了
-> ![](../assets/StackAndQueue3.png)
+> ![](./StackAndQueue3.png)
 
 （从左至右）如图 1
 
@@ -181,10 +181,10 @@ public boolean isValid(String s) {
 转换为后缀表达式：`a b c * + d e * f + g * +`.
 
 其转换过程如下：将以下每个运算符号都放在括号中，
-![](../assets/StackAndQueue4.png)
+![](./StackAndQueue4.png)
 
 随后将每个运算符号移除当前所处的括号外，得到
-![](../assets/StackAndQueue5.png)
+![](./StackAndQueue5.png)
 
 将括号去掉便得到我们的后缀表达式了，而如何按照原先规则运算就是我们这次讲的题了
 
@@ -273,7 +273,7 @@ private boolean isOperator(String ch){
 队列：只允许在**队尾**进行**元素插入**，在**队头**进行**元素删除**的一种特殊线性表，队列遵循**先进先出的原则**。
 
 对于队列的概念我们可以抽象理解为如下图，类似倒置的栈，但与栈不同
-![](../assets/StackAndQueue6.png)
+![](./StackAndQueue6.png)
 
 ### 2.2 如何使用队列
 java 中，队列与栈不同的是，**栈是一个类**，而**队列是一个接口**。
@@ -288,7 +288,7 @@ Queue<Integer> q = new PriorityQueue<>();
 ```
 
 队列 Queue 的**结构**如下
-![](../assets/StackAndQueue7.png)
+![](./StackAndQueue7.png)
 
 **队列的基本操作方法：**
 
@@ -456,7 +456,7 @@ public class MyQueue {
 
 
 ### 2.4 循环队列
-![](../assets/StackAndQueue8.png)
+![](./StackAndQueue8.png)
 循环队列：是顺序队列的一种优化，它解决了顺序队列出对后空间浪费的问题。
 
 > 1. 普通顺序队列：出队后，队头向后移动，数组前面出现空闲空间，但无法复用

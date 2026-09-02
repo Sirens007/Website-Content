@@ -103,12 +103,12 @@ public class Demo {
 >
 
 我们可以查看 Integer 源码中的`valueOf()`方法
-![](../assets/wrapper-generics1.png)
+![](./wrapper-generics1.png)
 
 我们可以看出自动装包输入的 i 在其中是个数组的范围，我们可以查看到 IntegerCache 这样一个类中设定了 `low = -128`,而`high`最终被`h = 127`所赋予，因此得到该缓存数组范围 `[-128,127]`
 
 我们再思考返回的数组内容，`IntegerCache.cache[i + (-IntegerCache.low)]`，我们就拿 `i = 100`代入
-![](../assets/wrapper-generics2.png)
+![](./wrapper-generics2.png)
 
 而我们通常比较“值”的方法是使用`a.equals(b)`
 

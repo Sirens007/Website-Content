@@ -53,7 +53,7 @@ public class Test {
 
 有人会好奇，为什么用名字比较会这么写 `return this.name.compareTo(o.name);`
 
-![](assets/Interface-theFuncOfObject1.png)
+![](./Interface-theFuncOfObject1.png)
 
 可以发现，String 类型中也有 compareTo()方法，因此我们直接调用即可
 
@@ -93,13 +93,13 @@ public class Test {
 
 我们继续使用上面那个例子，将 `compareTo()`方法以及接口屏蔽 会发现运行到`Arrays.sort(std);`这里的时候发生异常
 
-![](assets/Interface-theFuncOfObject2.png)
+![](./Interface-theFuncOfObject2.png)
 
 **ClassCastException **报错信息中 为类型转换异常
 
 `class demo3.Student cannot be cast to class java.lang.Comparable`也就是说 Student 不能被转换为 Comparable 型，
 
-![](assets/Interface-theFuncOfObject3.png)
+![](./Interface-theFuncOfObject3.png)
 
 图片中的意思是：
 
@@ -365,7 +365,7 @@ public class Person implements Cloneable{
 }
 ```
 
-此时在栈和堆中是这样的，引用同一个 m 对象，我们因此称之为**浅拷贝**![](assets/Interface-theFuncOfObject4.png)
+此时在栈和堆中是这样的，引用同一个 m 对象，我们因此称之为**浅拷贝**![](./Interface-theFuncOfObject4.png)
 
 如果 m 对象也被拷贝了，那就是深拷贝
 

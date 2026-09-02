@@ -15,7 +15,7 @@ draft: false
 ### 1.1啥是抽象类？
 在面向对象的概念中，所有的对象都是通过类来描绘的，但是反过来，并不是所有的类都是用来描绘对象的，如果一个类中没有足够的信息来描绘一个具体的对象，这样的类就是抽象类。
 
-![](assets/abstractclass-interface1.png)
+![](./abstractclass-interface1.png)
 
 像这样的Animal类一般只为服务创建Dog类和Cat类的，我们就可以直接定义为抽象类`（abstract class）`，以及animal类的`bark()`方法我们通常不调用，所以我们同样可以写为抽象方法`（abstract function）`。
 
@@ -184,7 +184,7 @@ public class Test {
 
 但是如果该具体动物类没有实现对应接口，那么就会报错
 
-![](assets/abstractclass-interface2.png)
+![](./abstractclass-interface2.png)
 
 ### 2.5接口间的继承
 ```java
@@ -208,7 +208,7 @@ interface IC extends IA,IB{
 
 ## 3.Object类
 ### 3.1初步了解Object类
-![](assets/abstractclass-interface3.png)
+![](./abstractclass-interface3.png)
 
 首先，我们要知道Object类是Java默认提供的一个类，Java里除了Object类，所有的类都是存在继承关系的。默认继承Object父类。即所有类的对象都可以使用Object的引用进攻接收。
 

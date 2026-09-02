@@ -8,7 +8,7 @@ category: 钻研一下~
 draft: false
 ---
 
-![](assets/twikoo1.png)
+![](./twikoo1.png)
 
 ## 一.必备环境下载
 ### 1.安装 Node.js 环境
@@ -86,7 +86,7 @@ db.createUser({
 
 
 
-![](assets/twikoo2.png)
+![](./twikoo2.png)
 
 5.验证登录
 
@@ -190,7 +190,7 @@ sudo nano /etc/nginx/sites-available/twikoo
 
 如图：
 
-![](assets/twikoo3.png)
+![](./twikoo3.png)
 
 
 
@@ -259,7 +259,7 @@ systemctl status mongod
 ```
 
 
-![](assets/twikoo4.png)
+![](./twikoo4.png)
 
 2.检查 tkserver 是否运行
 
@@ -276,7 +276,7 @@ ss -tlnp | grep 8080
 正常应该得到
 
 
-![](assets/twikoo5.png)
+![](./twikoo5.png)
 
 5.检查 MongDB 是否监听端口
 
@@ -285,7 +285,7 @@ ss -tlnp | grep 27017
 ```
 
 
-![](assets/twikoo6.png)
+![](./twikoo6.png)
 
 6.测试接口
 
@@ -296,7 +296,7 @@ https://你的站点
 ```
 
 
-![](assets/twikoo7.png)
+![](./twikoo7.png)
 
 得到如图所示即表示 tkserver 没有问题，以上配置完后即可正常在博客主题中加入对应接口，类似以下：
 

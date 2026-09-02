@@ -61,7 +61,7 @@ System.out.println(arr.length);
 
 这里我们先了解下他们的继承关系，如下图
 
-![](../assets/LearningException1.png)
+![](./LearningException1.png)
 
 我们可以了解到：
 

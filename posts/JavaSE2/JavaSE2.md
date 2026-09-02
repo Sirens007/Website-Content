@@ -299,7 +299,7 @@ System.out.println(ret);	//[[1,2,3],[4,5,6]]
 
 其中array的底层为图中所示
 
-![](assets/image.png)
+![](./image.png)
 
 ### 数组补充内容
 #### 1. 找最大值和最小值

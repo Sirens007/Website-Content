@@ -40,7 +40,7 @@ class 子类 extends 父类 {
 ### 1.2继承类型
 注意的是 java 不支持多继承，但支持多重继承。
 
-![](assets/inheritance1.png)
+![](./inheritance1.png)
 
 要知道，事实上我们并不需要过多的继承关系，这会导致向上追踪过于复杂。如果需要继承层次太多，就需要考虑对代码进行重构了。**一般我们不希望超过三层的继承关系。**
 
@@ -128,7 +128,7 @@ dog : eat
 animal : eat
 ```
 
-![](assets/inheritance2.png)
+![](./inheritance2.png)
 
 ​									**类以及变量都存放如图位置（jdk8之后）**
 
@@ -379,7 +379,7 @@ public class Z extends X {
 ### 1.8protected关键字
 主要限制：类或类中成员能否在类外或者其他包中被访问。
 
-![](assets/inheritance3.png)
+![](./inheritance3.png)
 
 注意：父类中private成员变量虽然在子类中不能直接访问，但是也继承到子类中了
 

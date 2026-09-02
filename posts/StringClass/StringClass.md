@@ -32,7 +32,7 @@ System.out.println(s3);
 > 1.String 是引用类型，内部并不存储字符串，而是像静态方法一样，通过引用去调用堆区的 value（JDK9 之后 value 由 char[] 类型改为了 byte[] 类型，）
 >
 
-![](assets/StringClass1.png)
+![](./StringClass1.png)
 
 ### 1.2 String 直接创建与对象创建
 ```java
@@ -45,7 +45,7 @@ String s5 = new String("World");
 
 以上为 String `直接创建`和`对象创建`内存示意图（画起来真累
 
-![](assets/StringClass2.png)
+![](./StringClass2.png)
 
 整个过程：
 
@@ -250,7 +250,7 @@ System.out.println(s1 == s4); // true
 
 方法库中 String 类本身重写了父类 Object 中的 equals 方法，String 类重写后 equals 方法由比较地址改为了如下规则
 
-![](assets/StringClass3.png)
+![](./StringClass3.png)
 
 ```java
 System.out.println(s1.equals(s2)); // true
@@ -434,7 +434,7 @@ for (int i = 0; i < s.length; i++) {
 ## 5.字符串的不可变性
 **一、String 是一种不可变对象，字符串中的内容是不可改变的。**
 
-![](assets/StringClass4.png)为了求证官方文件，我们打开 jdk 源码可以看到该核心定义
+![](./StringClass4.png)为了求证官方文件，我们打开 jdk 源码可以看到该核心定义
 
 > + `class String`首先被声明为`final`，表示不能被继承
 > + 其次`value`数组被声明为`private final`--表明 value 自身的值不能改变，即不能引用其它字符数组，但是其引用空间中的内容可以修改。
@@ -461,23 +461,23 @@ String 对象一旦创建，就固定绑定了内部`value[]`;
 
 那我们就举一个例子找找是谁限制住了不可修改，**如下**
 
-![](assets/StringClass5.png)
+![](./StringClass5.png)
 
 我们在 Test5 文件 `default final` 定义了数组 str，使用 Test3 去访问修改，可知编译器没有报错
 
-![](assets/StringClass6.png)
+![](./StringClass6.png)
 
 当我们修改为了 private 后
 
-![](assets/StringClass7.png)
+![](./StringClass7.png)
 
-![](assets/StringClass8.png)
+![](./StringClass8.png)
 
 显然爆红了，于此我们得到验证应该是 private 限制了你去访问。
 
 二、所有涉及到可能修改字符串内容的操作都是创建一个新对象，改变的是新对象
 
-![](assets/StringClass9.png)
+![](./StringClass9.png)
 
 我们就拿 String 类里的 replace 方法，可以看到的是只有”结果不变“的情况才返回`this`
 
@@ -556,7 +556,7 @@ public static void main(String[] args) {
 
 和 String 类不同的是，StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。
 
-![](assets/StringClass10.png)
+![](./StringClass10.png)
 
 **StringBuilder**
 

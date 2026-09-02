@@ -53,13 +53,13 @@ maven：类似应用商店，在maven仓库中维护了所有的Java工程需要
 
 不同版本可以到[Maven Repository: mysql](https://mvnrepository.com/search?q=mysql)此处找对应版本依赖
 
-![image-20260827191337560](../assets/jdbc0.png)
+![image-20260827191337560](./jdbc0.png)
 
 第一个 MySQL Connector-j 为最新版本的依赖推荐
 
 **IDEA创建模块选择maven后，在其下的pom.xml插入该依赖**
 
-![image-20260827191835082](../assets/jdbc1.png)
+![image-20260827191835082](./jdbc1.png)
 
 ```xml
 <dependency>
@@ -250,7 +250,7 @@ System.out.println("请输入学号：");
 
 使用**#**将后续语句屏蔽，由于**1=1**恒成立，因此完成全查询
 
-![image-20260828195923708](../assets/jdbc2.png)
+![image-20260828195923708](./jdbc2.png)
 
 
 

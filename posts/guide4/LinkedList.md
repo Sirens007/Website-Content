@@ -28,12 +28,12 @@ List 首先是一个接口（可理解为合同），而 `ArrayList`、`LinkedLi
 ## 2.ArrayList 的理解
 ### 2.1 什么是 ArrayList
 先从图片上引入对 `ArrayList` 的概念，其实就是数组
-![](../assets/LinkedList2.png)
+![](./LinkedList2.png)
 
 `ArrayList` 中文称为顺序表，
 
 从物理意义上：它是用一段**连续的物理内存**（数组）来表达线性关系的。
-![](../assets/LinkedList3.png)
+![](./LinkedList3.png)
 
 从源码上看主要是这几个常量，包括容量，数组，实际大小`usedSize`...
 
@@ -100,7 +100,7 @@ public class MyArrayList implements IList{
 链表是物理存储结构上非连存储结构，数据元素的逻辑顺序是通过链表中的引用链接次序实现的。每个节点存储了当前节点的 `value` 以及对下一个节点的索引
 
 其结构类似图中内容
-![](../assets/LinkedList4.png)
+![](./LinkedList4.png)
 
 实际中链表结构又是多样的：
 
@@ -139,7 +139,7 @@ public class MySingleList implements IList{
 我们选部分了解：
 
 头插法：
-![](../assets/LinkedList5.png)
+![](./LinkedList5.png)
 
 ```java
 public void addFirst(int data) {
@@ -154,7 +154,7 @@ public void addFirst(int data) {
 ---
 
 尾插法：
-![](../assets/LinkedList6.png)
+![](./LinkedList6.png)
 
 ```java
 public void addLast(int data) {
@@ -180,7 +180,7 @@ public void addLast(int data) {
 ---
 
 删除节点：
-![](../assets/LinkedList7.png)
+![](./LinkedList7.png)
 
 ```java
 @Override
@@ -239,10 +239,10 @@ private ListNode FindNodeBeforeKey(int key){
 `LinkedList` 的底层是双向链表结构，由于链表没有将元素存储在连续的空间中，元素存储在单独的节点中，然后通过引用将节点连接起来了，因此在任意位置插入或者删除元素时，不需要搬移元素，效率比较高。
 
 以下图片即为双向链表结构，包含了 `val`、`prev` 前驱、`next` 后驱以及 `head` 头指针和尾指针
-![](../assets/LinkedList8.png)
+![](./LinkedList8.png)
 
 通过以下集合框架可以发现，`LinkedList` 也同样实现了 List 接口：
-![](../assets/LinkedList9.png)
+![](./LinkedList9.png)
 
 说明：
 

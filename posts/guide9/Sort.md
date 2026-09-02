@@ -21,10 +21,10 @@ draft: false
 
 ### 1.1 插入排序实例
 **举例排序过程如下：**
-![](../assets/Sort1.png)
+![](./Sort1.png)
 
 **具体动图如下**：
-![](../assets/Sort2.gif)
+![](./Sort2.gif)
 
 实现代码如下：
 
@@ -76,25 +76,25 @@ public static void insertSort(int[] array) {
 初始 gap = 5；缩小量为 gap = gap/2
 
 数据如下
-![](../assets/Sort3.png)
+![](./Sort3.png)
 
 排序元素为**对应颜色指向的元素下**进行排序，得到如下数组
-![](../assets/Sort4.png)
+![](./Sort4.png)
 
 随后 gap = 2；此时每隔两个空间设为一个组类
-![](../assets/Sort5.png)
+![](./Sort5.png)
 
 排序后的数组为：
-![](../assets/Sort6.png)
+![](./Sort6.png)
 
 此后 gap  = 1；此时数组统一进行一次大排序，将进行直接插入操作，因此得到
-![](../assets/Sort7.png)
+![](./Sort7.png)
 
 **具体动图过程如下：**
 
 上 gif 动图中 gap = 2 时直接跳过变换过程，
 
-
+![](./Sort8.gif)
 
 实现代码如下：
 
@@ -123,10 +123,10 @@ private static void shell(int[] array,int gap) {
 
 ### 2.2 复杂度：
 在学术方面，对于希尔排序的时间复杂度一直有多种说法，也一直尚未有准确的时间复杂度。比如：
-![](../assets/Sort9.png)
+![](./Sort9.png)
 
 以及
-![](../assets/Sort10.png)
+![](./Sort10.png)
 
 根据对书籍总结，我们可以将其时间复杂度视为  **O(N^1.25)** 到  **O(1.6*N^1.25)** 来算
 
@@ -139,12 +139,12 @@ private static void shell(int[] array,int gap) {
 
 ### 3.1 选择排序实例
 **举例排序过程如下：**
-![](../assets/Sort11.png)
+![](./Sort11.png)
 
 由第一层的 i 暂定最小值，第二层的 j 遍历寻找是否有更小的元素
 
 **具体动图如下**：
-![](../assets/Sort12.gif)
+![](./Sort12.gif)
 
 实现代码如下：
 
@@ -188,7 +188,7 @@ public static void swap(int[] array,int i,int j) {
 优化后的过程如下图所述：
 
 定义 left 与 right 为数组两端，i 为中间元素下标在 for 循环中游走，同时比较最大最小值
-![](../assets/Sort13.png)
+![](./Sort13.png)
 
 **注意**：当**默认最小值为实际最大值**的时候，在**交换最小值过程**中**实际最大值**已被换走，而当**最大值交换过程**中**实际最大值**已被换为**实际最小值**，如图中所举案例 minIndex 要与 left 换，但 left（maxIndex）同时还要与 right 换，因此我们需要在此判断一下，`if (maxIndex == left) maxIndex = minIndex;`
 
@@ -268,7 +268,7 @@ public static void swap(int[] array,int i,int j) {
 例:集合{ 27,15,19,18,28,34,65,49,25,37 }
 
 `createHeap` 调用 `siftDown` 调整为大根堆过程如下:
-![](../assets/Sort14.png)
+![](./Sort14.png)
 
 我们要从**最后一个非叶子节点**下手,因此我们选定 4 下标与其子树进行比较,因此 4 下标为 parent 索引,9 下标则为 child 索引
 
@@ -282,12 +282,12 @@ public static void swap(int[] array,int i,int j) {
 
 
 `heapSort` 过程如下：
-![](../assets/Sort15.png)
+![](./Sort15.png)
 
 将堆顶（最大值）放到末尾，剩余部分重新调整为大根堆，依次进行最终调整为升序数组
 
 **具体动图如下：**
-![](../assets/Sort16.gif)
+![](./Sort16.gif)
 
 **实现代码如下：**
 
@@ -346,7 +346,7 @@ public static void swap(int[] array,int i,int j) {
 
 ### 4.2 复杂度：
 建堆`createHeap()`时间复杂度：
-![](../assets/Sort17.png)
+![](./Sort17.png)
 
 排序阶段`heapSort()`：
 
@@ -372,7 +372,7 @@ while (end > 0) {
 
 ### 5.1 冒泡排序实例
 **具体动图如下：**
-![](../assets/Sort18.gif)
+![](./Sort18.gif)
 
 该图为最终优化版代码：
 
@@ -478,7 +478,7 @@ void quick(int[] array, int left, int right) {
 
 
 **不论好坏情况，一般声明时间复杂度 O(N logN)、空间复杂度 O(log N)**
-![](../assets/Sort19.gif)
+![](./Sort19.gif)
 
 注意以下顺序：
 
@@ -493,7 +493,7 @@ void quick(int[] array, int left, int right) {
 **{6，1，2，7，9，3，4，5，10，8}**
 
 **注意**：由于基准值选在左端，必须**先从右向左找小**，再从左向右找大。如果左侧先移动，图中数组最终会在 9 位置停下，此时 9 不能与 6 交换；当左侧先走时**能保证 left 会停在一个比 6 小的位置**
-![](../assets/Sort20.png)
+![](./Sort20.png)
 
 左右相同的程序进行排序，类似二叉树;
 
@@ -521,7 +521,7 @@ private static int partition (int[] array, int left, int right) {
 
 #### 6.1.3 挖坑法（重点）
 
-#### ![](../assets/Sort21.gif)
+#### ![](./Sort21.gif)
 
 
 
@@ -534,7 +534,7 @@ private static int partition (int[] array, int left, int right) {
 5. 最后将基准值填入相遇位置
 
 
-![](../assets/Sort22.png)
+![](./Sort22.png)
 
 最终找到 pivot 中间值，该段方法仅需做到这点即可，剩余的是调用方法考虑的
 
@@ -576,7 +576,7 @@ private static int hole_Partition (int[] array, int left, int right){
 **以下动图即为双指针法排序过程：**
 
 
-![](../assets/Sort23.gif)
+![](./Sort23.gif)
 
 代码实现如下：
 
@@ -637,7 +637,7 @@ void quickSort(int[] array, int left, int right) {
 ```
 
 
-![](../assets/Sort24.png)
+![](./Sort24.png)
 
 根据上图思考以下比较代码：
 
@@ -725,7 +725,7 @@ private static void insertSortRange(int[] array,int start,int end) {
 以下为思路的实例举例：
 
 
-![](../assets/Sort25.png)
+![](./Sort25.png)
 
 
 
@@ -794,7 +794,7 @@ public static void quickNor(int[] array, int start, int end) {
 **图形化表示**如下：
 
 
-![](../assets/Sort26.png)
+![](./Sort26.png)
 
 ### 7.1 归并排序实例
 **具体动图如下**：
@@ -808,7 +808,7 @@ public static void quickNor(int[] array, int start, int end) {
 最终两大组再合并一起；
 
 
-![](../assets/mergeSort.gif)
+![](./mergeSort.gif)
 
 **实例参考**：
 
@@ -906,7 +906,7 @@ private static void merge(int[] array,int left,
 
 
 
-![](../assets/Sort27.png)
+![](./Sort27.png)
 
 ```java
 // 归并排序 非递归实现

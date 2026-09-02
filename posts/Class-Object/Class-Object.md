@@ -12,7 +12,7 @@ draft: false
 
 ## 1.定义类
 
-![](assets/java-object.png)
+![](./java-object.png)
 
 ```java
 public class Dog {
@@ -305,7 +305,7 @@ package pkg1[．pkg2[．pkg3…]];
 
 <font style="color:rgb(51,51,51);">如果一个类没有 package 语句, 则该类被放到一个默认包中.</font>
 
-![](assets/java-image.png)
+![](./java-image.png)
 
 即图中`软件包`，点击后输入` io.github.sirens007`<font style="color:rgb(51,51,51);">则会创建一个三级目录</font>
 
@@ -655,7 +655,7 @@ public class Main{
 
 如图下
 
-![](assets/java-image2.png)
+![](./java-image2.png)
 
 但当我们自己写上了toString方法的时候，就会输出我们自己想要的内容了
 

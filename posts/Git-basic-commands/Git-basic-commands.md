@@ -10,7 +10,7 @@ draft: false
 
 ## 📝Git工作流程
 
-![photo1](assets/photo1.png)
+![photo1](./photo1.png)
 
 ### 1.克隆仓库
 
@@ -221,7 +221,7 @@ git config --global user.email "2921646312@qq.com"
 
 <font style="color:rgb(51, 51, 51);">Git常用的是以下6个命令：git clone、git push、git add、git commit、git checkout、git pull，之后会详细介绍</font>
 
-![](assets/photo2.jpg)
+![](./photo2.jpg)
 
 说明：
 

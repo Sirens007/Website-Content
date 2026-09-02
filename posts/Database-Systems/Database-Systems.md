@@ -45,7 +45,7 @@ draft: false
 
 <font style="color:#2F4BDA;">数据库系统</font> <font style="color:#F38F39;">DataBase System, DBS</font>：数据库系统是由数据库、数据库管理系统（及其应用开发工具）、应用程序和数据库管理员 <font style="color:#F38F39;">DataBase Administrator, DBA</font> 组成的存储、管理、处理和维护数据的系统。
 
-![](./assets/Database-Systems0.png)
+![](./Database-Systems0.png)
 ### <font style="color:#DF2A3F;">数据管理技术的产生和发展</font>
 数据管理技术经历了⼈工管理、文件系统、数据库系统 3 个阶段。
 
@@ -63,7 +63,7 @@ draft: false
 #### <font style="color:#2F4BDA;">数据库系统阶段</font>
 <font style="color:#F1A2AB;">特点</font>：数据结构化；数据的共享性高，冗余度低，易扩充；数据独立性高；数据由 DBMS 统一管理和控制。
 
-![](./assets/Database-Systems1.png)
+![](./Database-Systems1.png)
 
 ## 1.2 数据模型
 **数据模型** <font style="color:#F38F39;">data model</font> 是一种模型，是对现实世界数据特征的抽象。是对现实世界的模拟。
@@ -194,7 +194,7 @@ E-R图提供了表示实体型、属性和联系的方法。
 ### <font style="color:#DF2A3F;">数据库系统的三级模式结构</font>
 数据库系统的三级模式结构是指数据库系统是由 <font style="color:#2F4BDA;">外模式、模式和内模式</font> 三级构成。
 
-![](./assets/Database-Systems2.png)
+![](./Database-Systems2.png)
 
 #### <font style="color:#2F4BDA;">模式 / 逻辑模式 </font><font style="color:#F38F39;">schema</font>
 数据库中全体数据的逻辑结构和特征的描述，是所有用户的公共数据视图。
@@ -244,7 +244,7 @@ E-R图提供了表示实体型、属性和联系的方法。
 
 不同的⼈员涉及不同的数据抽象级别，具有不同的数据视图。
 
-![](./assets/Database-Systems3.png)
+![](./Database-Systems3.png)
 
 # Note 02 关系数据库
 ## 2.1 关系数据结构及形式化定义
@@ -444,12 +444,12 @@ R：n 目关系，k1 个元组，S：m 目关系，k2 个元组。
 运算结果为：行为 k1 × k2 个元组，列为 (n + m) 列元组的集合。  
 其中元组的前 n 列是关系 R 的一个元组，后 m 列是关系 S 的一个元组。**
 
-![](./assets/Database-Systems4.png)
+![](./Database-Systems4.png)
 
 ### <font style="color:#DF2A3F;">专门的关系运算</font>
 **关系运算包括：选择、投影、连接、除运算。** 
 
-![](./assets/Database-Systems32.png)
+![](./Database-Systems32.png)
 
 # Note 03 关系数据库标准语言 SQL
 ## 3.1 SQL 概述
@@ -458,7 +458,7 @@ R：n 目关系，k1 个元组，S：m 目关系，k2 个元组。
 SQL 是一个通用的、功能极强的关系数据库语言。
 
 ### <font style="color:#DF2A3F;">SQL 的产生与发展</font>
-![](./assets/Database-Systems5.png)
+![](./Database-Systems5.png)
 
 ### <font style="color:#DF2A3F;">SQL 的特点</font>
 #### <font style="color:#213BC0;">综合统一</font>
@@ -502,7 +502,7 @@ SQL 支持关系数据库三级模式结构。
 
 其中外模式包括若干 <font style="color:#213BC0;">视图</font> <font style="color:#C75C00;">view</font> 和部分 <font style="color:#213BC0;">基本表 </font><font style="color:#C75C00;">base table</font>，数据库模式包括若干基本表， 内模式包括若干 <font style="color:#213BC0;">存储文件</font> <font style="color:#C75C00;">stored file</font>。
 
-![](./assets/Database-Systems6.png)
+![](./Database-Systems6.png)
 
 #### <font style="color:#213BC0;">基本表</font>
 本身独立存在的表，关系数据库管理系统中一个关系就对应一个基本表。
@@ -526,24 +526,24 @@ SQL 支持关系数据库三级模式结构。
 
 <font style="color:#213BC0;">学生表：Student(Sno,Sname,Ssex,Sage, Sdept)</font>
 
-![](./assets/Database-Systems7.png)
+![](./Database-Systems7.png)
 
 <font style="color:#213BC0;">课程表：Course(Cno, Cname, Cpno, Ccredit)</font>
 
-![](./assets/Database-Systems8.png)
+![](./Database-Systems8.png)
 
 <font style="color:#213BC0;">学生选课表：SC(Sno.Cno,Grade)</font>
 
-![](./assets/Database-Systems9.png)
+![](./Database-Systems9.png)
 
 ## 3.3 数据定义
 **SQL** **的数据定义功能包括模式定义、表定义、视图和索引的定义。**
 
-![](./assets/Database-Systems10.png)
+![](./Database-Systems10.png)
 
 一个关系数据库管理系统的 **实例** <font style="color:#C75C00;">instance</font> 中可以建立多个数据库，一个数据库中可以建立多个模式，一个模式 下通常包括多个表、视图和索引等数据库对象。
 
-![](./assets/Database-Systems11.png)
+![](./Database-Systems11.png)
 
 ### <font style="color:#DF2A3F;">模式的定义与删除</font>
 #### <font style="color:#213BC0;">定义模式</font>
@@ -633,9 +633,9 @@ CREATE TABLE SC(Sno CHAR(9)，
 
 #### <font style="color:#0C68CA;">数据类型</font>
 
-![](./assets/Database-Systems12.png)
+![](./Database-Systems12.png)
 
-![](./assets/Database-Systems13.png)
+![](./Database-Systems13.png)
 
 #### <font style="color:#0C68CA;">模式与表</font>
 每一个基本表都属于某一个模式，一个模式包含多个基本表。
@@ -863,11 +863,11 @@ SELECT Sname NAME,'Year of Birth:' BIRTH,2014-Sage BIRTHDAY,LOWER(Sdept) DEPARTM
 FROM Student;
 ```
 
-![](./assets/Database-Systems14.png)
+![](./Database-Systems14.png)
 
-![](./assets/Database-Systems15.png)
+![](./Database-Systems15.png)
 
-![](./assets/Database-Systems16.png)
+![](./Database-Systems16.png)
 
 #### <font style="color:rgb(0,0,255);">选择表中的若干元组 </font>
 <font style="color:rgb(255,69,0);">消除取值重复的行</font>
@@ -910,7 +910,7 @@ SELECT DISTINCT Sno FROM SC；
 
 **多重条件中**，逻辑运算符 <font style="color:rgb(233,105,0);">AND </font>和 <font style="color:rgb(233,105,0);">OR </font>可用来连接多个查询条件。 <font style="color:rgb(233,105,0);">AND </font>优先级高于 <font style="color:rgb(233,105,0);">OR </font>，但可用括号改变。
 
-![](./assets/Database-Systems17.png)
+![](./Database-Systems17.png)
 
 ```sql
 /*比较：查询考试成绩不及格的学⽣的学号*/ 
@@ -1235,7 +1235,7 @@ SELECT Sname,Sage
 
 **用聚集函数实现子查询通常比直接用** **ANY** **或 ALL** **查询效率要高**。
 
-![](./assets/Database-Systems18.png)
+![](./Database-Systems18.png)
 
 #### <font style="color:rgb(0,0,255);">带有 EXISTS 谓词的子查询</font>
 EXISTS 代表存在量词。带有 EXISTS 谓词的子查询不返回任何数据，只产生逻辑真值 “true” 或逻辑假值 “false”。
@@ -1515,7 +1515,7 @@ SQL 语言中允许某些元组的某些属性取空值，一般有以下几种�
 
 逻辑运算：扩展成三值逻辑，如下：
 
-![](./assets/Database-Systems19.png)
+![](./Database-Systems19.png)
 
 ## 3.7 视图
 **视图是从一个或几个基本表（或视图）导出的表。它与基本表不同，是一个虚表。** 数据库中只存放视图的定义，不存放视图对应的数据。
@@ -1634,11 +1634,11 @@ DROP VIEW IS IS_S1 CASCADE;
 
 ### <font style="color:#DF2A3F;">安全标准简介</font>
 #### <font style="color:#2F4BDA;">安全标准的发展历史</font>
-![](./assets/Database-Systems20.png)
+![](./Database-Systems20.png)
 
 <font style="color:#2F4BDA;">TCSEC / TDI </font>将系统划分为 4 组`division`，共 7 个等级。（用于设计前？）
 
-![](./assets/Database-Systems21.png)
+![](./Database-Systems21.png)
 
 D 级：最低级别。实现操作系统基本功能，无安全性保障。[ DOS ] 
 
@@ -1656,7 +1656,7 @@ A 级： 验证设计，给出系统的形式化设计说明和验证（确保�
 
 <font style="color:#2F4BDA;">CC </font>（用于设计后验证？）
 
-![](./assets/Database-Systems22.png)
+![](./Database-Systems22.png)
 
 ## 4.2 数据库安全性控制
 ### <font style="color:#DF2A3F;">概述</font>
@@ -1667,7 +1667,7 @@ A 级： 验证设计，给出系统的形式化设计说明和验证（确保�
 
 <font style="color:#2F4BDA;">计算机系统的安全模型</font>：计算机系统中安全措施是一级一级层层设置的。
 
-![](./assets/Database-Systems23.png)
+![](./Database-Systems23.png)
 
 #### <font style="color:#2F4BDA;">数据库管理系统安全性控制模型</font>
 1. 数据库管理系统对提出 SQL 访问请求的数据库用户进行身份鉴别，防止不可信用户使用系统；
@@ -1676,7 +1676,7 @@ A 级： 验证设计，给出系统的形式化设计说明和验证（确保�
 4. 通过设置简单入侵检测规则，对异常用户行为进行检测和处理。
 5. 在数据存储层，数据库管理系统不仅存放用户数据，还存储安全数据，提供存储加密功能等。
 
-![](./assets/Database-Systems24.png)
+![](./Database-Systems24.png)
 
 ### <font style="color:#DF2A3F;">用户身份鉴别</font>
 用户身份鉴别是数据库管理系统提供的最外层安全保护措施。每个用户在系统中都有个用户标识。
@@ -1726,7 +1726,7 @@ DBMS 提供适当的语言来定义用户权限，存放在数据字典中，称
 
 RDBMS 存取控制的对象不仅有数据本身还有数据库模式，关系数据库系统中存取控制对象如下：
 
-![](./assets/Database-Systems25.png)
+![](./Database-Systems25.png)
 
 在给用户授予列 INSERT 权限时，需要包含主码的 INSERT 权限，否则用户的插入动作会因为主码为空而被拒绝。
 
@@ -1790,7 +1790,7 @@ REVOKE UPDATE(Sno) ON TABLE Student FROM U4 CASCADE;
 
 <font style="color:#81DFE4;">说明</font>：新创建的数据库用户有三<font style="color:#ED740C;"></font>种权限：CONNECT、RESOURCE 和 DBA，默认 CONNECT。权限如下：
 
-![](./assets/Database-Systems26.png)
+![](./Database-Systems26.png)
 
 #### <font style="color:#2F4BDA;">数据库角色</font>
 数据库角色是被命名的一组与数据库操作相关的权限，角色是权限的集合。
@@ -1910,7 +1910,7 @@ MAC 是对数据本身进行密级标记，标记与数据不可分，只有符�
 
 MAC 与 DAC 共同构成数据库管理系统的安全机制。
 
-![](./assets/Database-Systems27.png)
+![](./Database-Systems27.png)
 
 ## 4.3 视图机制
 视图对数据库安全的作用：
@@ -2028,7 +2028,7 @@ NOAUDIT ALTER, UPDATE ON SC;
 
 基于基于安全套接层协议<font style="color:#ED740C;">SSL, Security Socket Layer</font> 的数据库管理系统可信传输方案：
 
-![](./assets/Database-Systems28.png)
+![](./Database-Systems28.png)
 
 ## 4.6 其他安全性保护
 **<font style="color:#2F4BDA;">推理控制</font>** `inference control` 
@@ -2130,11 +2130,11 @@ CREATE TABLE SC
 
 全表扫描十分耗时。
 
-![](./assets/Database-Systems29.png)
+![](./Database-Systems29.png)
 
 为避免对基本表进行全表扫描，RDBMS 核心一般都在主码上自动建立一个索引。如 B+ 树索引。
 
-![](./assets/Database-Systems30.png)
+![](./Database-Systems30.png)
 
 ## 5.2 参照完整性
 ### <font style="color:#DF2A3F;">参照完整性定义</font>
@@ -2157,7 +2157,7 @@ CREATE TABLE SC
 
 对被参照表和参照表进行增、删、改操作时有可能破坏参照完整性，此时必须进行检查以保证这两个表的相容性。
 
-![](./assets/Database-Systems31.png)
+![](./Database-Systems31.png)
 
 当发生以上 4 种可能破坏参照完整性的情况时，系统可以采用以下 3 种策略加以处理。
 
